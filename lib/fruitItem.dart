@@ -17,7 +17,7 @@ class FruitItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Image.network(
-                  this.item.imageUrl,
+                  this.item.imageurl,
                   width: 200,
                 ),
                 Expanded(
