@@ -19,24 +19,6 @@ List<Fruit> decodeFruit(String responseBody) {
   return parsed.map<Fruit>((json) => Fruit.fromMap(json)).toList();
 }
 
-Future<Fruit> updateFruit(String title) async {
-  final http.Response response = await http.put(
-    'https://crud-fruits.glitch.me/mostrarfruits',
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'title': title,
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    return Fruit.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to update album.');
-  }
-}
-
 Future<Fruit> sendFruit(
     String title, int id, String imageurl, int quantity) async {
   final http.Response response = await http.post(
@@ -46,7 +28,6 @@ Future<Fruit> sendFruit(
     },
     body: jsonEncode(<String, String>{
       'title': title,
-      'id': id.toString(),
       'imageurl': imageurl,
       'quantity': quantity.toString()
     }),
@@ -54,11 +35,11 @@ Future<Fruit> sendFruit(
   if (response.statusCode == 201) {
     return Fruit.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception('Failed to load');
   }
 }
 
-Future<Fruit> deleteAlbum(int id) async {
+Future<Fruit> deleteFruit(int id) async {
   final http.Response response = await http.delete(
     'url/$id',
     headers: <String, String>{
@@ -69,6 +50,6 @@ Future<Fruit> deleteAlbum(int id) async {
   if (response.statusCode == 200) {
     return Fruit.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to delete album.');
+    throw Exception('Failed to delete fruit.');
   }
 }
